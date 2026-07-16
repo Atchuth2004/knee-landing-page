@@ -54,12 +54,12 @@ img {
 }
 
 /* ==========================================================
-   CONTAINER – Responsive with reduced side margins
+   CONTAINER – 15px side margins on larger screens
    ========================================================== */
 .wrap {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 15px;
     width: 100%;
 }
 
@@ -96,7 +96,7 @@ div {
     background: #ffffff;
     box-shadow: 0 2px 20px rgba(0, 20, 50, 0.08);
     z-index: 1000;
-    padding: 12px 0;
+    padding: 18px 0;
 }
 
 .header-container {
@@ -105,7 +105,7 @@ div {
     align-items: center;
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 15px;
     width: 100%;
 }
 
@@ -122,6 +122,7 @@ div {
     max-height: 50px;
     display: block;
     object-fit: contain;
+    margin-left: 35px;
 }
 
 .header-actions {
@@ -147,6 +148,7 @@ div {
     white-space: nowrap;
     transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     font-family: var(--font-body);
+    margin-right: 34px;
 }
 
 .phone-link svg {
@@ -179,7 +181,7 @@ div {
             rgba(242, 241, 252, 0.92) 35%,
             rgba(255, 255, 255, 0.75) 70%,
             rgba(255, 233, 219, 0.72) 100%),
-        url("https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1800&q=80");
+        url("assets/knee image.webp");
     background-size: cover;
     background-position: center 30%;
     font-family: var(--font-body);
@@ -187,9 +189,9 @@ div {
 
 .hero-container {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 15px;
     display: grid;
     grid-template-columns: 48% 52%;
     align-items: center;
@@ -201,7 +203,7 @@ div {
 }
 
 .hero-left h1 {
-    font-size: 42px;
+    font-size: 40px;
     line-height: 1.2;
     font-weight: 800;
     margin-bottom: 20px;
@@ -393,7 +395,7 @@ div {
    ========================================================== */
 .stats-section {
     position: relative;
-    padding: 50px 0;
+    padding: 50px 35px;
     overflow: hidden;
     background:
         radial-gradient(circle at top left, rgba(167, 121, 121, 0.08), transparent 35%),
@@ -518,7 +520,7 @@ div {
    SERVICES
    ========================================================== */
 .services {
-    padding: 50px 0;
+    padding: 50px 35px;
     background: var(--lp-bg-light);
 }
 
@@ -599,18 +601,17 @@ div {
 }
 
 /* ==========================================================
-   DOCTORS – matches reference layout, no color changes
+   DOCTORS – All cards visible on desktop, one at a time on mobile
    ========================================================== */
 .doctors {
-    padding: 40px 0 50px;
+    padding: 40px 35px;
     position: relative;
     background:
         linear-gradient(90deg,
             rgba(238, 236, 248, 0.92) 0%,
             rgba(238, 236, 248, 0.75) 40%,
             rgba(255, 255, 255, 0.65) 75%,
-            rgba(255, 255, 255, 0.90) 100%
-        );
+            rgba(255, 255, 255, 0.90) 100%);
     border-top: 1px solid rgba(130, 127, 198, 0.08);
 }
 
@@ -641,7 +642,7 @@ div {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 0;
 }
 
 .doctors-carousel {
@@ -649,18 +650,19 @@ div {
     flex: 1;
 }
 
-/* — Flex grid — single row, all cards inline, no wrapping — */
+/* — Flex grid — desktop: all visible, mobile: one at a time with swipe — */
 .doctors-grid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 24px;
+    gap: 18px;
     transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
 }
 
-/* — Card — height follows content, no fixed px height — */
+/* — Card — */
 .doctor-card {
     flex: 0 0 auto;
+    width: auto;
     border: 1px solid var(--border-light);
     border-radius: 16px;
     overflow: hidden;
@@ -669,7 +671,10 @@ div {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 28px 24px 24px;
+    padding: 20px 16px 20px;
+    min-width: 260px;
+    max-width: 320px;
+    flex: 1 1 0;
 }
 
 .doctor-card:hover {
@@ -678,14 +683,14 @@ div {
     border-color: var(--lp-orange);
 }
 
-/* — Avatar — bigger, breathing room around it — */
+/* — Avatar — */
 .doctor-avatar {
     aspect-ratio: 1/1;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--lp-purple-light), var(--lp-orange-light));
-    margin: 0 auto 18px;
+    margin: 0 auto 14px;
     width: 132px;
     border: 3px solid var(--lp-purple-light);
     transition: border-color 0.3s ease;
@@ -707,72 +712,66 @@ div {
     transform: scale(1.05);
 }
 
-/* — Doctor body — natural flow, small consistent gaps — */
+/* — Doctor body — */
 .doctor-body {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-/* — Name — */
 .doctor-body h3 {
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--lp-card-heading);
     margin-bottom: 4px;
     line-height: 1.3;
 }
 
-/* — Qualification — */
 .doctor-qualification {
-    font-size: 13px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--lp-purple-dark);
     font-family: var(--font-body);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
-/* — Role — */
 .doctor-role {
-    font-size: 13.5px;
+    font-size: 11.5px;
     color: var(--lp-text-dark);
     font-weight: 500;
     margin-bottom: 4px;
     font-family: var(--font-body);
-    line-height: 1.45;
+    line-height: 1.4;
 }
 
-/* — Specialization — */
 .doctor-spec {
-    font-size: 13px;
+    font-size: 10.5px;
     color: var(--lp-text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-family: var(--font-body);
-    line-height: 1.45;
+    line-height: 1.4;
 }
 
-/* — Experience — now a pill/box with light purple background — */
 .doctor-exp-pill {
     display: inline-block;
-    font-size: 14.5px;
+    font-size: 11.5px;
     font-weight: 700;
     color: var(--lp-purple-dark);
     background: var(--lp-purple-light);
-    padding: 4px 20px;
+    padding: 4px 18px;
     border-radius: 20px;
     border: 1px solid rgba(130, 127, 198, 0.12);
     font-family: var(--font-body);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     align-self: center;
     letter-spacing: 0.2px;
 }
 
-/* — Button — sits right below experience, no auto margin gap — */
 .btn-orange {
     display: block;
     width: 100%;
-    padding: 13px 12px;
+    padding: 12px 10px;
     background: var(--lp-orange);
     color: #fff;
     font-family: var(--font-body);
@@ -830,7 +829,7 @@ div {
     box-shadow: none !important;
 }
 
-/* — Dots — */
+/* — Dots (hidden on desktop, shown on mobile) — */
 .carousel-dots {
     display: flex;
     justify-content: center;
@@ -864,7 +863,7 @@ div {
    TECH / COMPARISON
    ========================================================== */
 .tech {
-    padding: 50px 0;
+    padding: 50px 35px;
     background: linear-gradient(135deg, #ffffff 0%, var(--lp-orange-light) 100%);
     border-top: 1px solid rgba(130, 127, 198, 0.08);
 }
@@ -994,14 +993,13 @@ tbody td:nth-child(3) {
    WHY CHOOSE
    ========================================================== */
 .why {
-    padding: 50px 0;
+    padding: 50px 35px;
     background:
         linear-gradient(90deg,
             rgba(238, 236, 248, 0.92) 0%,
             rgba(238, 236, 248, 0.75) 40%,
             rgba(255, 255, 255, 0.65) 75%,
-            rgba(255, 255, 255, 0.90) 100%
-        );
+            rgba(255, 255, 255, 0.90) 100%);
     border-top: 1px solid rgba(130, 127, 198, 0.08);
     border-bottom: 1px solid rgba(130, 127, 198, 0.08);
 }
@@ -1101,10 +1099,10 @@ tbody td:nth-child(3) {
 }
 
 /* ==========================================================
-   TESTIMONIALS
+   TESTIMONIALS – All cards visible on desktop, one at a time on mobile
    ========================================================== */
 .testimonials {
-    padding: 50px 0;
+    padding: 50px 35px;
     background: var(--lp-orange-light);
     border-top: 1px solid rgba(130, 127, 198, 0.06);
     border-bottom: 1px solid rgba(130, 127, 198, 0.06);
@@ -1114,7 +1112,7 @@ tbody td:nth-child(3) {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0;
 }
 
 .testi-carousel-container {
@@ -1122,24 +1120,28 @@ tbody td:nth-child(3) {
     flex: 1;
 }
 
-/* — Testimonials grid as flex — no wrapping — */
+/* — Testimonials grid — desktop: all visible, mobile: one at a time — */
 .testi-grid {
     display: flex;
     flex-wrap: nowrap;
-    gap: 18px;
+    gap: 16px;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
 }
 
 .testi-card {
     flex: 0 0 auto;
+    width: auto;
     background: #ffffff;
     border: 1px solid var(--border-light);
     border-radius: 14px;
-    padding: 20px 18px;
+    padding: 18px 16px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    min-width: 240px;
+    max-width: 320px;
+    flex: 1 1 0;
 }
 
 .testi-card:hover {
@@ -1211,6 +1213,7 @@ tbody td:nth-child(3) {
     font-family: var(--font-body);
 }
 
+/* — Carousel arrows — */
 .testi-btn {
     width: 40px;
     height: 40px;
@@ -1246,6 +1249,7 @@ tbody td:nth-child(3) {
     box-shadow: none !important;
 }
 
+/* — Dots (hidden on desktop, shown on mobile) — */
 .testi-dots {
     display: flex;
     justify-content: center;
@@ -1279,14 +1283,13 @@ tbody td:nth-child(3) {
    FAQ
    ========================================================== */
 .faq {
-    padding: 50px 0;
+    padding: 50px 35px;
     background:
         linear-gradient(90deg,
             rgba(238, 236, 248, 0.92) 0%,
             rgba(238, 236, 248, 0.75) 40%,
             rgba(255, 255, 255, 0.65) 75%,
-            rgba(255, 255, 255, 0.90) 100%
-        );
+            rgba(255, 255, 255, 0.90) 100%);
     border-top: 1px solid rgba(130, 127, 198, 0.08);
     border-bottom: 1px solid rgba(130, 127, 198, 0.08);
 }
@@ -1376,17 +1379,11 @@ tbody td:nth-child(3) {
 }
 
 /* ==========================================================
-   CONSULTATION
+   CONSULTATION / CTA
    ========================================================== */
 .consultation-section {
-    padding: 50px 0 60px;
-    background:
-        linear-gradient(90deg,
-            rgba(238, 236, 248, 0.92) 0%,
-            rgba(238, 236, 248, 0.75) 40%,
-            rgba(255, 255, 255, 0.65) 75%,
-            rgba(255, 255, 255, 0.90) 100%
-        );
+    padding: 50px 40px;
+    background: #fef3e8;
     border-top: 1px solid rgba(130, 127, 198, 0.08);
     border-bottom: 1px solid rgba(130, 127, 198, 0.08);
     overflow: hidden;
@@ -1395,13 +1392,12 @@ tbody td:nth-child(3) {
 .consultation-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 24px;
     align-items: center;
 }
 
 .consultation-left {
     color: var(--lp-card-heading);
-    margin-left: 35px;
 }
 
 .consultation-left h2 {
@@ -1504,7 +1500,7 @@ tbody td:nth-child(3) {
 
 .consult-card {
     width: 100%;
-    max-width: 520px;
+    max-width: 480px;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(130, 127, 198, 0.12);
@@ -1635,7 +1631,7 @@ tbody td:nth-child(3) {
    FOOTER
    ========================================================== */
 .footer-section {
-    padding: 30px 0 24px;
+    padding: 30px 35px;
     background: var(--lp-card-heading);
     border-top: 3px solid var(--lp-orange);
 }
@@ -1691,6 +1687,7 @@ tbody td:nth-child(3) {
         transform: scale(1);
         opacity: 1;
     }
+
     100% {
         transform: scale(1.4);
         opacity: 0;
@@ -1714,196 +1711,333 @@ tbody td:nth-child(3) {
 }
 
 /* ==========================================================
-   RESPONSIVE - LARGE (1024px - 1280px)
+   ==========================================================
+   RESPONSIVE DESIGN – TABLETS & MOBILE
+   ==========================================================
    ========================================================== */
-@media (max-width: 1200px) {
-    .doctors-grid {
-        gap: 16px;
-    }
-    .testi-grid {
-        gap: 16px;
-    }
-}
 
-/* ==========================================================
-   RESPONSIVE - MEDIUM (768px - 1024px)
-   ========================================================== */
+/* ===== TABLET (769px - 1024px) ===== */
 @media (max-width: 1024px) {
-    .hero-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .hero-left {
-        text-align: center;
-    }
-
-    .hero-left p {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .features {
-        justify-items: center;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    .consult-box {
-        max-width: 100%;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-    }
-
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
-
-    .doctors-grid {
-        gap: 16px;
-    }
-
-    .tech-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-    }
-
-    .testi-grid {
-        gap: 16px;
-    }
-
-    .consultation-container {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-
-    .consultation-left {
-        text-align: center;
-    }
-
-    .consultation-left p {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .consult-buttons {
-        justify-content: center;
-    }
-
-    .consult-card {
-        max-width: 100%;
-    }
-}
-
-/* ==========================================================
-   RESPONSIVE - SMALL (480px - 768px)
-   ========================================================== */
-@media (max-width: 768px) {
     body {
-        padding-top: 64px;
+        padding-top: 72px;
     }
 
-    .wrap {
-        padding: 0 16px;
+    .header {
+        padding: 12px 0;
     }
-
-    .header-container {
-        padding: 0 16px;
-    }
-
     .logo img {
-        height: 40px;
-        max-height: 40px;
+        height: 44px;
+        max-height: 44px;
+        margin-left: 20px;
     }
-
     .phone-link {
-        font-size: 13px;
+        font-size: 14px;
         padding: 6px 14px;
-        border-width: 2px;
+        margin-right: 20px;
     }
-
-    .phone-link .phone-number {
-        display: inline-block;
-        font-size: 12px;
-        margin-left: 2px;
-    }
-
     .phone-link svg {
         width: 16px;
         height: 16px;
     }
 
     .hero {
-        padding: 12px 0 40px;
+        padding: 30px 0 50px;
     }
-
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+    .hero-left {
+        text-align: center;
+    }
     .hero-left h1 {
-        font-size: 28px;
+        font-size: 34px;
+        text-align: center;
     }
-
     .hero-left p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 14px;
+    }
+    .features {
+        justify-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    .consult-box {
+        max-width: 100%;
+        padding: 18px 20px 14px;
+    }
+    .consult-box h2 {
+        font-size: 19px;
+    }
+    .consult-box .input-box {
+        height: 38px;
+        padding: 0 12px;
+    }
+    .consult-box .input-box input {
+        font-size: 13px;
+    }
+    .consult-box button {
+        height: 38px;
         font-size: 14px;
     }
 
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    .stats-title {
+        font-size: 20px;
+    }
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    .doctors-grid {
+        gap: 16px;
+    }
+    .doctor-card {
+        flex: 0 0 calc(33.333% - 12px);
+        max-width: calc(33.333% - 12px);
+        min-width: 200px;
+        padding: 18px 14px 16px;
+    }
+    .doctor-avatar {
+        width: 110px;
+    }
+    .doctor-body h3 {
+        font-size: 15px;
+    }
+    .doctor-qualification {
+        font-size: 11px;
+    }
+    .doctor-role {
+        font-size: 11px;
+    }
+    .doctor-spec {
+        font-size: 10px;
+    }
+    .doctor-exp-pill {
+        font-size: 11px;
+        padding: 3px 14px;
+    }
+
+    .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .tech h2 {
+        font-size: 26px;
+        text-align: center;
+    }
+    .tech .desc {
+        text-align: center;
+    }
+    .section-tag-box {
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: center;
+        width: fit-content;
+    }
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    .testi-grid {
+        gap: 16px;
+    }
+    .testi-card {
+        flex: 0 0 calc(33.333% - 12px);
+        max-width: calc(33.333% - 12px);
+        min-width: 200px;
+        padding: 16px 14px;
+    }
+    .consultation-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .consultation-left {
+        text-align: center;
+    }
+    .consultation-left p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .consult-buttons {
+        justify-content: center;
+    }
+    .consult-card {
+        max-width: 100%;
+    }
+    .consultation-left h2 {
+        font-size: 28px;
+        text-align: center;
+    }
+}
+
+/* ===== SMALL TABLET / LARGE PHONE (481px - 768px) ===== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 66px;
+    }
+    .wrap {
+        padding: 0 12px;
+    }
+
+    .header {
+        padding: 10px 0;
+    }
+    .header-container {
+        padding: 0 12px;
+    }
+    .logo img {
+        height: 38px;
+        max-height: 38px;
+        margin-left: 10px;
+    }
+    .header-actions {
+        gap: 10px;
+    }
+    .phone-link {
+        font-size: 13px;
+        padding: 5px 12px;
+        gap: 8px;
+        border-width: 1.8px;
+        margin-right: 10px;
+    }
+    .phone-link .phone-number {
+        font-size: 12px;
+    }
+    .phone-link svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .hero {
+        padding: 20px 0 40px;
+    }
+    .hero-container {
+        padding: 0 12px;
+        gap: 24px;
+    }
+    .hero-left h1 {
+        font-size: 30px;
+        margin-bottom: 16px;
+    }
+    .hero-left p {
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
     .features {
         grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        gap: 8px 10px;
+        max-width: 100%;
     }
-
     .feature {
-        padding: 6px 10px;
-        min-height: 36px;
+        padding: 6px 10px 6px 8px;
+        min-height: 38px;
+        border-radius: 10px;
     }
-
+    .feature i {
+        font-size: 13px;
+    }
     .feature span {
         font-size: 11px;
     }
-
     .consult-box {
-        padding: 16px 18px 14px;
+        padding: 16px 16px 12px;
+        border-radius: 16px;
     }
-
     .consult-box h2 {
         font-size: 18px;
+    }
+    .consult-box p {
+        font-size: 11px;
+        margin-top: 2px;
+        margin-bottom: 12px;
+    }
+    .consult-box .input-box {
+        height: 36px;
+        padding: 0 10px;
+        gap: 8px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+    .consult-box .input-box i {
+        font-size: 12px;
+        width: 16px;
+    }
+    .consult-box .input-box input {
+        font-size: 12px;
+    }
+    .consult-box button {
+        height: 36px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+    .consult-box .privacy {
+        font-size: 10px;
+        margin-top: 8px;
+    }
+    .consult-box .privacy i {
+        font-size: 12px;
     }
 
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
-
     .stats-title {
         font-size: 20px;
+        margin-bottom: 24px;
+    }
+    .stats-section {
+        padding: 40px 0;
+    }
+    .stat-card {
+        padding: 14px 6px;
+    }
+    .stat-card h3 {
+        font-size: 20px;
+    }
+    .stat-card p {
+        font-size: 11px;
     }
 
-    .section-heading {
-        font-size: 22px;
+    .services {
+        padding: 40px 0;
     }
-
     .services-grid {
         grid-template-columns: 1fr;
         gap: 12px;
     }
+    .section-head {
+        margin-bottom: 24px;
+    }
+    .section-heading {
+        font-size: 22px;
+    }
+    .section-sub {
+        font-size: 13px;
+    }
 
-    /* — DOCTORS: show one card at a time — */
+    .doctors {
+        padding: 30px 0;
+    }
     .doctors-grid {
         gap: 14px;
     }
     .doctor-card {
         flex: 0 0 100% !important;
         width: 100% !important;
-        padding: 20px 14px 16px;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        padding: 18px 14px 16px;
     }
     .doctor-avatar {
         width: 100px;
@@ -1930,142 +2064,234 @@ tbody td:nth-child(3) {
         font-size: 12px;
         padding: 10px 10px;
     }
+    .carousel-dots {
+        display: flex !important;
+        margin-top: 12px;
+    }
+    .carousel-dots .dot {
+        width: 7px;
+        height: 7px;
+    }
+    .carousel-dots .dot.active {
+        width: 20px;
+    }
 
-    .carousel-btn {
-        width: 34px;
-        height: 34px;
+    .tech {
+        padding: 40px 0;
+    }
+    .tech-grid {
+        gap: 24px;
+    }
+    .tech h2 {
+        font-size: 24px;
+    }
+    .tech .desc {
+        font-size: 13px;
+    }
+    .tech-points li {
+        font-size: 12px;
+    }
+    table {
+        font-size: 11px;
+    }
+    thead th,
+    tbody td {
+        padding: 8px 10px;
+    }
+    .section-tag-box {
+        font-size: 11px;
+        padding: 4px 12px 4px 10px;
+    }
+    .section-tag-box i {
         font-size: 12px;
     }
 
-    .carousel-btn i {
-        font-size: 12px;
+    .why {
+        padding: 40px 0;
     }
-
     .why-grid {
         grid-template-columns: 1fr;
         gap: 14px;
     }
+    .why-card {
+        min-height: 140px;
+        padding: 16px 12px;
+    }
+    .why-icon {
+        width: 42px;
+        height: 42px;
+    }
+    .why-icon i {
+        font-size: 18px;
+    }
+    .why-card h3 {
+        font-size: 15px;
+    }
+    .why-card p {
+        font-size: 11px;
+    }
+    .why-header {
+        margin-bottom: 24px;
+    }
 
-    /* — TESTIMONIALS: show one card at a time — */
+    .testimonials {
+        padding: 40px 0;
+    }
     .testi-grid {
         gap: 14px;
     }
     .testi-card {
         flex: 0 0 100% !important;
         width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
         padding: 16px 14px;
     }
-
-    .testi-btn {
-        width: 34px;
-        height: 34px;
+    .testi-quote {
         font-size: 12px;
     }
-
-    .testi-btn i {
-        font-size: 12px;
+    .testi-dots {
+        display: flex !important;
+        margin-top: 14px;
+    }
+    .testi-dots .dot {
+        width: 7px;
+        height: 7px;
+    }
+    .testi-dots .dot.active {
+        width: 20px;
     }
 
+    .faq {
+        padding: 40px 0;
+    }
+    .faq-question {
+        font-size: 14px;
+        padding: 14px 16px;
+    }
+    .faq-answer {
+        font-size: 13px;
+        padding: 0 16px;
+    }
+    .faq-item.open .faq-answer {
+        padding: 0 16px 14px;
+    }
+
+    .consultation-section {
+        padding: 40px 0;
+    }
+    .consultation-container {
+        gap: 24px;
+    }
     .consultation-left h2 {
         font-size: 26px;
     }
-
+    .consultation-left p {
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
     .consult-card {
         padding: 20px 18px;
     }
-
     .consult-card h3 {
         font-size: 18px;
     }
+    .consult-card .input-box {
+        height: 40px;
+    }
+    .consult-btn {
+        font-size: 14px;
+        height: 40px;
+    }
+    .call-btn,
+    .whatsapp-btn {
+        padding: 8px 14px;
+    }
+    .btn-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+    .btn-text strong {
+        font-size: 13px;
+    }
 
+    .footer-section {
+        padding: 24px 0;
+    }
+    .footer-copy {
+        font-size: 11px;
+    }
     .float-whatsapp {
         width: 48px;
         height: 48px;
         bottom: 16px;
         right: 16px;
     }
-
     .float-whatsapp svg {
         width: 24px;
         height: 24px;
     }
 }
 
-/* ==========================================================
-   RESPONSIVE - EXTRA SMALL (below 480px)
-   ========================================================== */
+/* ===== MOBILE (≤480px) – COVERS: iPhone SE, XR, 12 Pro, Pixel 7, S20 Ultra ===== */
 @media (max-width: 480px) {
-    /* — Fix: header/hero gap closed — */
     body {
-        padding-top: 46px;
+        padding-top: 48px;
     }
 
     .header {
-        padding: 6px 0;
+        padding: 9px 0;
     }
-
-    .hero {
-        padding-top: 2px;
-        padding-bottom: 30px;
-    }
-
-    .wrap {
-        padding: 0 12px;
-    }
-
     .header-container {
-        padding: 0 12px;
+        padding: 0 10px;
+        overflow: hidden;
     }
-
     .logo img {
         height: 32px;
         max-height: 32px;
+        margin-left: 3.5px;
     }
-
     .phone-link {
         font-size: 11px;
         padding: 4px 10px;
+        gap: 5px;
         border-width: 1.5px;
-        gap: 6px;
+        margin-right: 0 !important;
     }
-
     .phone-link .phone-number {
-        display: inline-block;
         font-size: 10px;
+        display: inline-block;
     }
-
     .phone-link svg {
         width: 14px;
         height: 14px;
     }
 
-    /* — Hero: left-aligned text — */
+    .hero {
+        padding: 8px 0 30px;
+    }
     .hero-container {
-        padding: 0 12px;
+        padding: 0 15px;
         gap: 20px;
     }
-
     .hero-left {
         text-align: left;
         margin-left: 0;
     }
-
     .hero-left h1 {
-        font-size: 28px;
+        font-size: 24px;
         text-align: left;
         margin-bottom: 12px;
     }
-
     .hero-left p {
-        font-size: 15px;
+        font-size: 12.5px;
         text-align: left;
         max-width: 100%;
         margin-left: 0;
         margin-right: 0;
         margin-bottom: 18px;
     }
-
-    /* — Features: 2 columns, left-aligned — */
     .features {
         grid-template-columns: 1fr 1fr;
         gap: 6px;
@@ -2073,93 +2299,121 @@ tbody td:nth-child(3) {
         margin: 0;
         justify-items: stretch;
     }
-
     .feature {
-        padding: 6px 8px 6px 6px;
-        min-height: 34px;
+        padding: 5px 8px 5px 6px;
+        min-height: 32px;
         gap: 6px;
         border-radius: 8px;
     }
-
     .feature i {
-        font-size: 12px;
+        font-size: 11px;
         margin-top: 0;
     }
-
     .feature span {
         font-size: 10px;
         line-height: 1.3;
     }
-
-    /* — Consult box full width — */
     .consult-box {
         max-width: 100%;
-        padding: 14px 14px 12px;
+        padding: 14px 12px 12px;
         border-radius: 14px;
     }
-
     .consult-box h2 {
         font-size: 17px;
     }
-
     .consult-box p {
-        font-size: 11px;
+        font-size: 10px;
         margin-top: 2px;
         margin-bottom: 10px;
     }
-
     .consult-box .input-box {
-        height: 36px;
-        padding: 0 10px;
-        gap: 8px;
-        margin-bottom: 8px;
+        height: 34px;
+        padding: 0 8px;
+        gap: 6px;
+        margin-bottom: 6px;
         border-radius: 8px;
     }
-
     .consult-box .input-box i {
-        font-size: 12px;
-        width: 16px;
+        font-size: 11px;
+        width: 14px;
     }
-
     .consult-box .input-box input {
-        font-size: 12px;
+        font-size: 11px;
     }
-
+    .consult-box .input-box input::placeholder {
+        font-size: 11px;
+    }
     .consult-box button {
-        height: 36px;
-        font-size: 13px;
+        height: 34px;
+        font-size: 12px;
         border-radius: 8px;
     }
-
     .consult-box .privacy {
-        font-size: 10px;
-        margin-top: 8px;
+        font-size: 9px;
+        margin-top: 6px;
+        gap: 4px;
     }
-
     .consult-box .privacy i {
-        font-size: 12px;
-    }
-
-    /* — Stats — */
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-
-    .stat-card {
-        padding: 12px 6px;
-        border-radius: 12px;
-    }
-
-    .stat-card h3 {
-        font-size: 18px;
-    }
-
-    .stat-card p {
         font-size: 11px;
     }
 
-    /* — DOCTORS: 1 per view — */
+    .stats-section {
+        padding: 30px 0;
+    }
+    .stats-grid {
+        gap: 8px;
+    }
+    .stat-card {
+        padding: 10px 4px;
+        border-radius: 12px;
+    }
+    .stat-card h3 {
+        font-size: 16px;
+    }
+    .stat-card p {
+        font-size: 10px;
+    }
+    .stats-title {
+        font-size: 17px;
+        margin-bottom: 20px;
+    }
+    .stat-icon {
+        width: 22px;
+        height: 22px;
+        margin-bottom: 8px;
+    }
+    .stat-icon i {
+        font-size: 10px;
+    }
+
+    .services {
+        padding: 30px 0;
+    }
+    .section-heading {
+        font-size: 20px;
+    }
+    .section-sub {
+        font-size: 12px;
+    }
+    .service-card {
+        padding: 14px 12px;
+    }
+    .service-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .service-card h3 {
+        font-size: 14px;
+    }
+    .service-card p {
+        font-size: 11px;
+    }
+
+    .doctors {
+        padding: 24px 0;
+    }
     .doctors-grid {
         gap: 10px;
     }
@@ -2170,13 +2424,10 @@ tbody td:nth-child(3) {
         border-radius: 12px;
     }
     .doctor-avatar {
-        width: 100px;
-        height: 100px;
+        width: 85px;
+        height: 85px;
         margin: 4px auto 10px;
         border-width: 2px;
-    }
-    .doctor-body {
-        padding: 0;
     }
     .doctor-body h3 {
         font-size: 14px;
@@ -2192,29 +2443,23 @@ tbody td:nth-child(3) {
         line-height: 1.35;
     }
     .doctor-spec {
-        font-size: 10.5px;
+        font-size: 10px;
         margin-bottom: 8px;
         line-height: 1.35;
     }
     .doctor-exp-pill {
-        font-size: 11.5px;
+        font-size: 10px;
         padding: 3px 14px;
         margin-bottom: 10px;
         border-radius: 16px;
     }
     .btn-orange {
-        font-size: 12.5px;
+        font-size: 12px;
         padding: 10px 8px;
         border-radius: 8px;
     }
-
-    .carousel-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 10px;
-    }
-    .carousel-btn i {
-        font-size: 10px;
+    .carousel-dots {
+        margin-top: 10px;
     }
     .carousel-dots .dot {
         width: 6px;
@@ -2224,42 +2469,63 @@ tbody td:nth-child(3) {
         width: 14px;
     }
 
-    /* — TECH: center tag, smaller heading — */
-    .section-tag-box {
-        display: flex;
-        justify-content: center;
-        margin-left: auto;
-        margin-right: auto;
-        width: fit-content;
-        font-size: 11px;
-        padding: 4px 12px 4px 10px;
-    }
-    .section-tag-box i {
-        font-size: 12px;
+    .tech {
+        padding: 30px 0;
     }
     .tech h2 {
-        font-size: 22px;
+        font-size: 20px;
         text-align: center;
     }
     .tech .desc {
-        font-size: 13px;
+        font-size: 12px;
         text-align: center;
     }
     .tech-points li {
-        font-size: 12px;
+        font-size: 11px;
     }
     .tech-grid {
-        gap: 24px;
+        gap: 20px;
     }
     table {
-        font-size: 11px;
+        font-size: 10px;
     }
     thead th,
     tbody td {
-        padding: 8px 10px;
+        padding: 6px 8px;
     }
 
-    /* — TESTIMONIALS: 1 card visible — */
+    .why {
+        padding: 30px 0;
+    }
+    .why-header {
+        margin-bottom: 20px;
+    }
+    .why-grid {
+        gap: 12px;
+    }
+    .why-card {
+        min-height: 120px;
+        padding: 14px 10px;
+        border-radius: 12px;
+    }
+    .why-icon {
+        width: 38px;
+        height: 38px;
+        margin-bottom: 8px;
+    }
+    .why-icon i {
+        font-size: 16px;
+    }
+    .why-card h3 {
+        font-size: 14px;
+    }
+    .why-card p {
+        font-size: 10.5px;
+    }
+
+    .testimonials {
+        padding: 30px 0;
+    }
     .testi-grid {
         gap: 10px;
     }
@@ -2270,16 +2536,29 @@ tbody td:nth-child(3) {
         margin: 0;
     }
     .testi-quote {
-        font-size: 13px;
-        line-height: 1.7;
+        font-size: 11px;
+        line-height: 1.6;
     }
-    .testi-btn {
-        width: 30px;
-        height: 30px;
+    .testi-stars i {
+        font-size: 12px;
+    }
+    .testi-divider {
+        width: 32px;
+        margin-bottom: 10px;
+    }
+    .testi-avatar {
+        width: 34px;
+        height: 34px;
         font-size: 11px;
     }
-    .testi-btn i {
-        font-size: 11px;
+    .testi-name {
+        font-size: 12px;
+    }
+    .testi-age {
+        font-size: 10px;
+    }
+    .testi-dots {
+        margin-top: 12px;
     }
     .testi-dots .dot {
         width: 6px;
@@ -2289,33 +2568,9 @@ tbody td:nth-child(3) {
         width: 14px;
     }
 
-    /* — Consultation — */
-    .consultation-left h2 {
-        font-size: 22px;
+    .faq {
+        padding: 30px 0;
     }
-    .consult-buttons {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    .call-btn,
-    .whatsapp-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 10px 16px;
-    }
-    .consult-card {
-        padding: 16px 14px;
-    }
-    .consult-card h3 {
-        font-size: 17px;
-    }
-    .consult-btn {
-        font-size: 14px;
-        height: 40px;
-    }
-
-    /* — FAQ — */
     .faq-question {
         font-size: 13px;
         padding: 12px 14px;
@@ -2327,16 +2582,66 @@ tbody td:nth-child(3) {
     .faq-item.open .faq-answer {
         padding: 0 14px 14px;
     }
+    .faq-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+    }
 
-    /* — Footer — */
+    .consultation-section {
+        padding: 30px 0;
+    }
+    .consultation-left h2 {
+        font-size: 22px;
+    }
+    .consult-buttons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .call-btn,
+    .whatsapp-btn {
+        width: 80%;
+        justify-content: center;
+        padding: 8px 12px;
+    }
+    .consult-card {
+        padding: 16px 14px;
+    }
+    .consult-card h3 {
+        font-size: 17px;
+    }
+    .consult-card p {
+        font-size: 10px;
+        text-align: center;
+    }
+    .consult-btn {
+        font-size: 14px;
+        height: 40px;
+    }
+    .consult-card .input-box {
+        height: 36px;
+        padding: 0 10px;
+    }
+    .consult-card .input-box i {
+        font-size: 12px;
+    }
+    .consult-card .input-box input {
+        font-size: 12px;
+    }
+    .consult-card .privacy {
+        font-size: 10px;
+    }
+    .consult-card .privacy i {
+        font-size: 12px;
+    }
+
     .footer-section {
-        padding: 24px 0 18px;
+        padding: 20px 0;
     }
     .footer-copy {
         font-size: 11px;
     }
-
-    /* — WhatsApp — */
     .float-whatsapp {
         width: 44px;
         height: 44px;
@@ -2346,5 +2651,119 @@ tbody td:nth-child(3) {
     .float-whatsapp svg {
         width: 22px;
         height: 22px;
+    }
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* ===== EXTRA SMALL (≤360px) – COVERS: Galaxy S8 ===== */
+@media (max-width: 360px) {
+    body {
+        padding-top: 54px;
+    }
+
+    .logo img {
+        height: 28px;
+        max-height: 28px;
+    }
+    .phone-link {
+        font-size: 10px;
+        padding: 3px 8px;
+        gap: 4px;
+    }
+    .phone-link .phone-number {
+        font-size: 9px;
+    }
+    .phone-link svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .hero-left h1 {
+        font-size: 22px;
+    }
+    .hero-left p {
+        font-size: 13px;
+    }
+    .feature {
+        padding: 4px 6px 4px 4px;
+        min-height: 28px;
+        gap: 4px;
+        border-radius: 6px;
+    }
+    .feature i {
+        font-size: 10px;
+    }
+    .feature span {
+        font-size: 9px;
+    }
+    .consult-box {
+        padding: 12px 10px 10px;
+    }
+    .consult-box h2 {
+        font-size: 15px;
+    }
+    .consult-box .input-box {
+        height: 30px;
+        padding: 0 6px;
+        gap: 4px;
+        border-radius: 6px;
+    }
+    .consult-box .input-box i {
+        font-size: 10px;
+        width: 12px;
+    }
+    .consult-box .input-box input {
+        font-size: 10px;
+    }
+    .consult-box button {
+        height: 30px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .stat-card h3 {
+        font-size: 16px;
+    }
+    .stat-card p {
+        font-size: 9px;
+    }
+
+    .doctor-avatar {
+        width: 75px;
+        height: 75px;
+    }
+    .doctor-body h3 {
+        font-size: 13px;
+    }
+    .doctor-exp-pill {
+        font-size: 10px;
+        padding: 2px 12px;
+    }
+    .btn-orange {
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+
+    .tech h2 {
+        font-size: 20px;
+    }
+    .why-card h3 {
+        font-size: 13px;
+    }
+    .why-card p {
+        font-size: 10px;
+    }
+
+    .consultation-left h2 {
+        font-size: 20px;
+    }
+    .consult-card h3 {
+        font-size: 15px;
+    }
+    .consult-btn {
+        font-size: 13px;
+        height: 36px;
     }
 }

@@ -251,11 +251,8 @@
                 <p class="section-sub">Decades of combined experience in orthopaedics and joint replacement.</p>
             </div>
 
+            <!-- No arrows – just the carousel container -->
             <div class="doctors-carousel-wrapper">
-                <button class="carousel-btn prev-btn" id="prevBtn" aria-label="Previous">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
                 <div class="doctors-carousel" id="doctorsCarousel">
                     <div class="doctors-grid" id="doctorsGrid">
                         <!-- Doctor 1 -->
@@ -319,12 +316,9 @@
                         </div>
                     </div>
                 </div>
-
-                <button class="carousel-btn next-btn" id="nextBtn" aria-label="Next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
 
+            <!-- Dots indicator -->
             <div class="carousel-dots" id="dotsContainer"></div>
         </div>
     </section>
@@ -479,11 +473,8 @@
                 <p class="section-sub">Real stories from real patients who got their mobility back.</p>
             </div>
 
+            <!-- No arrows – just the carousel container -->
             <div class="testi-carousel-wrapper">
-                <button class="testi-btn prev-btn" id="testiPrev" aria-label="Previous">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
                 <div class="testi-carousel-container">
                     <div class="testi-grid" id="testiGrid">
                         <!-- Testimonial 1 -->
@@ -571,13 +562,9 @@
                         </div>
                     </div>
                 </div>
-
-                <button class="testi-btn next-btn" id="testiNext" aria-label="Next">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
 
-            <!-- Dots container - FIXED: Added this missing div -->
+            <!-- Dots indicator -->
             <div class="testi-dots" id="testiDots"></div>
         </div>
     </section>
@@ -769,13 +756,14 @@
     </a>
 
     <script>
+        // ============================================================
+        // DOCTORS CAROUSEL – No arrows, touch swipe on mobile
+        // ============================================================
         (function () {
             const grid = document.getElementById('doctorsGrid');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
             const dotsContainer = document.getElementById('dotsContainer');
 
-            if (!grid || !prevBtn || !nextBtn || !dotsContainer) return;
+            if (!grid || !dotsContainer) return;
 
             const cards = grid.querySelectorAll('.doctor-card');
             const totalCards = cards.length;
@@ -783,14 +771,13 @@
 
             function getVisibleCount() {
                 const width = window.innerWidth;
-                if (width < 768) return 1;
-                if (width < 1024) return 2;
-                return 3;
+                if (width < 768) return 1;   // mobile: 1 card
+                return totalCards;            // desktop: all cards
             }
 
             function getCardWidth() {
-                const gridComputed = getComputedStyle(grid);
-                const gap = parseFloat(gridComputed.gap) || 20;
+                const gc = getComputedStyle(grid);
+                const gap = parseFloat(gc.gap) || 18;
                 const containerWidth = grid.parentElement.clientWidth;
                 const count = getVisibleCount();
                 return (containerWidth - (count - 1) * gap) / count;
@@ -798,16 +785,34 @@
 
             function getTotalSlides() {
                 const count = getVisibleCount();
+                if (count >= totalCards) return 1;  // desktop: only 1 slide (all cards visible)
                 return Math.max(1, totalCards - count + 1);
             }
 
             function updateCarousel() {
+                const count = getVisibleCount();
+                if (count >= totalCards) {
+                    // Desktop: show all cards, no transform
+                    grid.style.transform = 'translateX(0)';
+                    cards.forEach(card => {
+                        card.style.flex = '0 0 auto';
+                        card.style.width = 'auto';
+                    });
+                    dotsContainer.style.display = 'none';
+                    return;
+                }
+
+                // Mobile: show 1 card at a time
                 const cardWidth = getCardWidth();
-                const gap = parseFloat(getComputedStyle(grid).gap) || 20;
+                const gap = parseFloat(getComputedStyle(grid).gap) || 18;
                 const translateX = -(currentIndex * (cardWidth + gap));
                 grid.style.transform = 'translateX(' + translateX + 'px)';
+                cards.forEach(card => {
+                    card.style.flex = '0 0 ' + cardWidth + 'px';
+                    card.style.width = cardWidth + 'px';
+                });
+                dotsContainer.style.display = 'flex';
                 updateDots();
-                updateButtons();
             }
 
             function updateDots() {
@@ -825,30 +830,52 @@
                 }
             }
 
-            function updateButtons() {
-                const total = getTotalSlides();
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= total - 1;
-            }
+            // ===== TOUCH SWIPE SUPPORT =====
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isDragging = false;
 
-            prevBtn.addEventListener('click', function () {
-                if (currentIndex > 0) {
-                    currentIndex--;
+            grid.addEventListener('touchstart', function (e) {
+                const count = getVisibleCount();
+                if (count >= totalCards) return;  // desktop: no swipe
+                touchStartX = e.changedTouches[0].screenX;
+                isDragging = true;
+            }, { passive: true });
+
+            grid.addEventListener('touchmove', function (e) {
+                if (!isDragging) return;
+                // Optional: add drag visual feedback
+            }, { passive: true });
+
+            grid.addEventListener('touchend', function (e) {
+                if (!isDragging) return;
+                isDragging = false;
+                const count = getVisibleCount();
+                if (count >= totalCards) return;
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                const total = getTotalSlides();
+
+                if (Math.abs(diff) > 30) {  // minimum swipe distance
+                    if (diff > 0 && currentIndex < total - 1) {
+                        currentIndex++;
+                    } else if (diff < 0 && currentIndex > 0) {
+                        currentIndex--;
+                    }
                     updateCarousel();
                 }
-            });
-            nextBtn.addEventListener('click', function () {
-                const total = getTotalSlides();
-                if (currentIndex < total - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
+            }, { passive: true });
 
+            // ===== RESIZE HANDLER =====
             let resizeTimer;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function () {
+                    const count = getVisibleCount();
+                    if (count >= totalCards) {
+                        updateCarousel();
+                        return;
+                    }
                     const total = getTotalSlides();
                     if (currentIndex >= total) {
                         currentIndex = total - 1;
@@ -858,36 +885,23 @@
                 }, 150);
             });
 
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'ArrowLeft') {
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        updateCarousel();
-                    }
-                }
-                if (e.key === 'ArrowRight') {
-                    const total = getTotalSlides();
-                    if (currentIndex < total - 1) {
-                        currentIndex++;
-                        updateCarousel();
-                    }
-                }
-            });
-
+            // ===== INIT =====
             currentIndex = 0;
             updateCarousel();
+
             window.addEventListener('load', function () {
-                setTimeout(updateCarousel, 100);
+                setTimeout(updateCarousel, 150);
             });
         })();
 
+        // ============================================================
+        // TESTIMONIALS CAROUSEL – No arrows, touch swipe on mobile
+        // ============================================================
         (function () {
             const grid = document.getElementById('testiGrid');
-            const prevBtn = document.getElementById('testiPrev');
-            const nextBtn = document.getElementById('testiNext');
             const dotsContainer = document.getElementById('testiDots');
 
-            if (!grid || !prevBtn || !nextBtn || !dotsContainer) return;
+            if (!grid || !dotsContainer) return;
 
             const cards = grid.querySelectorAll('.testi-card');
             const totalCards = cards.length;
@@ -895,15 +909,13 @@
 
             function getVisibleCount() {
                 const width = window.innerWidth;
-                if (width < 768) return 1;
-                if (width < 1024) return 2;
-                if (width < 1200) return 3;
-                return 4;
+                if (width < 768) return 1;   // mobile: 1 card
+                return totalCards;            // desktop: all cards
             }
 
             function getCardWidth() {
-                const gridComputed = getComputedStyle(grid);
-                const gap = parseFloat(gridComputed.gap) || 20;
+                const gc = getComputedStyle(grid);
+                const gap = parseFloat(gc.gap) || 16;
                 const containerWidth = grid.parentElement.clientWidth;
                 const count = getVisibleCount();
                 return (containerWidth - (count - 1) * gap) / count;
@@ -911,16 +923,34 @@
 
             function getTotalSlides() {
                 const count = getVisibleCount();
+                if (count >= totalCards) return 1;
                 return Math.max(1, totalCards - count + 1);
             }
 
             function updateCarousel() {
+                const count = getVisibleCount();
+                if (count >= totalCards) {
+                    // Desktop: show all cards
+                    grid.style.transform = 'translateX(0)';
+                    cards.forEach(card => {
+                        card.style.flex = '0 0 auto';
+                        card.style.width = 'auto';
+                    });
+                    dotsContainer.style.display = 'none';
+                    return;
+                }
+
+                // Mobile: show 1 card at a time
                 const cardWidth = getCardWidth();
-                const gap = parseFloat(getComputedStyle(grid).gap) || 20;
+                const gap = parseFloat(getComputedStyle(grid).gap) || 16;
                 const translateX = -(currentIndex * (cardWidth + gap));
                 grid.style.transform = 'translateX(' + translateX + 'px)';
+                cards.forEach(card => {
+                    card.style.flex = '0 0 ' + cardWidth + 'px';
+                    card.style.width = cardWidth + 'px';
+                });
+                dotsContainer.style.display = 'flex';
                 updateDots();
-                updateButtons();
             }
 
             function updateDots() {
@@ -938,30 +968,51 @@
                 }
             }
 
-            function updateButtons() {
-                const total = getTotalSlides();
-                prevBtn.disabled = currentIndex === 0;
-                nextBtn.disabled = currentIndex >= total - 1;
-            }
+            // ===== TOUCH SWIPE SUPPORT =====
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isDragging = false;
 
-            prevBtn.addEventListener('click', function () {
-                if (currentIndex > 0) {
-                    currentIndex--;
+            grid.addEventListener('touchstart', function (e) {
+                const count = getVisibleCount();
+                if (count >= totalCards) return;
+                touchStartX = e.changedTouches[0].screenX;
+                isDragging = true;
+            }, { passive: true });
+
+            grid.addEventListener('touchmove', function (e) {
+                // Optional: add drag feedback
+            }, { passive: true });
+
+            grid.addEventListener('touchend', function (e) {
+                if (!isDragging) return;
+                isDragging = false;
+                const count = getVisibleCount();
+                if (count >= totalCards) return;
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                const total = getTotalSlides();
+
+                if (Math.abs(diff) > 30) {
+                    if (diff > 0 && currentIndex < total - 1) {
+                        currentIndex++;
+                    } else if (diff < 0 && currentIndex > 0) {
+                        currentIndex--;
+                    }
                     updateCarousel();
                 }
-            });
-            nextBtn.addEventListener('click', function () {
-                const total = getTotalSlides();
-                if (currentIndex < total - 1) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
+            }, { passive: true });
 
+            // ===== RESIZE HANDLER =====
             let resizeTimer;
             window.addEventListener('resize', function () {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function () {
+                    const count = getVisibleCount();
+                    if (count >= totalCards) {
+                        updateCarousel();
+                        return;
+                    }
                     const total = getTotalSlides();
                     if (currentIndex >= total) {
                         currentIndex = total - 1;
@@ -971,26 +1022,12 @@
                 }, 150);
             });
 
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'ArrowLeft') {
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        updateCarousel();
-                    }
-                }
-                if (e.key === 'ArrowRight') {
-                    const total = getTotalSlides();
-                    if (currentIndex < total - 1) {
-                        currentIndex++;
-                        updateCarousel();
-                    }
-                }
-            });
-
+            // ===== INIT =====
             currentIndex = 0;
             updateCarousel();
+
             window.addEventListener('load', function () {
-                setTimeout(updateCarousel, 100);
+                setTimeout(updateCarousel, 150);
             });
         })();
 
